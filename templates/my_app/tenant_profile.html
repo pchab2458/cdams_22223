@@ -1,0 +1,57 @@
+{% extends "app_base_html.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}Tenant Page{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block style %}
+    <style>
+
+        #sec1 {
+            line-height: 140%;
+            font-size: 118%;
+            font-weight: normal;
+            color: blue;
+            padding: 20px 60px;
+            background: skyblue;
+            width: 420px;
+            border-radius: 40px;
+        }
+
+        label {
+            display: block;
+            width: 8.5em;
+            font-weight: bold;
+            color: black;
+            float: left;
+            text-align: left;
+            padding-right: .5em;
+        }
+
+
+    </style>
+
+{% endblock %}
+
+
+{% block content %}
+
+    <h2>รายละเอียดของผู้เช่า [{{ cur_dt|date:'d-M-y' }}]</h2>
+    <section id="sec1">
+        <label>ชื่อ-นามสกุล:</label>{{ tenant_pf.tenant }}<br>
+        <label>เลขบัตรประชาชน:</label>{{ tenant_pf.pin }}<br>
+        <label>เบอร์โทรศัพท์:</label>{{ tenant_pf.phone }}<br>
+        <label>เบอร์ห้อง:</label>{{ tenant_pf.room_no }}<br>
+        <label>วันเริ่มเช่า:</label>{{ tenant_pf.start_date }}<br>
+        <label>ค่าห้อง:</label>{{ tenant_pf.room_no.room_type.rate|floatformat:0|intcomma }}<br>
+        <label>ค่าอุปกรณ์:</label>{{ room_acc_cost|floatformat:0|intcomma }}<br>
+        <label>ค่าบริการอื่น:</label>{{ oth_ser_cost|floatformat:0|intcomma }}<br>
+        <label>ลด/เพิ่ม:</label>{{ tenant_pf.adjust|floatformat:0|intcomma }}<br>
+        <label>ค่าประกัน:</label>{{ tenant_pf.deposit|floatformat:0|intcomma }}<br>
+        <label style="color: brown">ค้างจ่าย:</label><span style="color: brown">{{ tenant_pf.cum_ovd|floatformat:0|intcomma }}</span><br>
+
+    </section>
+
+{% endblock %}

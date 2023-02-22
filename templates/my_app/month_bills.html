@@ -1,0 +1,125 @@
+{% extends 'app_base_html.html' %}
+{% load static %}
+{% load humanize %}
+{% load ams_tags %}
+
+{% block title %}Monthly Bills{% endblock %}
+
+{% block style %}
+    <style>
+
+        table {
+            border-collapse: collapse;
+            margin: 0;
+        }
+
+        thead, tfoot {
+            background-color: dodgerblue;
+            text-align: right;
+            color: white;
+            line-height: 1.5;
+        }
+
+        th, td {
+            padding: .2em .2em;
+            text-align: right;
+        }
+
+        tr:nth-child(even) {
+            background-color: lightblue;
+        }
+
+        td a {
+            color: red;
+        }
+
+        td a:hover {
+            color: blue;
+        }
+
+        th:nth-child(1) {
+            text-align: center;
+        {#width: 230px;#}
+
+        }
+
+        th:nth-child(2) {
+            text-align: center;
+            width: 50px;
+        }
+
+        th:nth-child(3) {
+            text-align: right;
+            width: 65px;
+        }
+
+        th:nth-child(4) {
+            text-align: right;
+            width: 65px;
+        }
+
+        th:nth-child(5), th:nth-child(6),
+        th:nth-child(7), th:nth-child(8),
+        th:nth-child(9), th:nth-child(10) {
+            text-align: right;
+            width: 60px;
+        }
+
+        th:nth-child(11) {
+            text-align: right;
+            width: 65px;
+        }
+
+        td:nth-child(1) {
+            text-align: left;
+        }
+
+        td:nth-child(2) {
+            text-align: center;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <h2>มีบิลรอชำระ <span style="color: red">{{ avail_open_bills.count }}</span> บิล จากทั้งหมด <span style="color: red">{{ total_open_bill }}</span> บิล [งวดเดือน {{ thai_bill_month }} {{ thai_bill_year }}]</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>NAME</th>
+            <th>ROOM</th>
+            <th>RCAC</th>
+            <th>EC</th>
+            <th>WC</th>
+            <th>CSC</th>
+            <th>OSC</th>
+            <th>OVD</th>
+            <th>LF</th>
+            <th>MC</th>
+            <th>TOTAL</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bill in avail_open_bills %}
+            <tr>
+                <td>{{ bill.tenant_name }}</td>
+                <td><a href="{{ bill.get_absolute_url }}"> {{ bill.room_no }}</a></td>
+                <td>{{ bill.room_cost|add:bill.room_acc_cost|add:bill.adjust|floatformat:0|intcomma }}</td>
+                <td>{{ bill.electricity_cost|floatformat:0|intcomma }}</td>
+                <td>{{ bill.water_cost|floatformat:0|intcomma }}</td>
+                <td>{{ bill.common_ser_cost|floatformat:0|intcomma }}</td>
+                <td>{{ bill.other_ser_cost|floatformat:0|intcomma }}</td>
+                <td>{{ bill.overdue_amount|floatformat:0|intcomma }}</td>
+                <td>{{ bill.late_fee|floatformat:0|intcomma }}</td>
+                <td>{{ bill.maint_cost|floatformat:0|intcomma }}</td>
+                <td>{{ bill.bill_total|floatformat:0|intcomma }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+

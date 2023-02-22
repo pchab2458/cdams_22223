@@ -1,0 +1,225 @@
+{% extends "app_base_html.html" %}
+{% load static %}
+
+{% block title %}Create new account{% endblock %}
+
+{% block script %}
+
+    <link rel="stylesheet" href={% static "js/jquery-ui.css" %}>
+    <script src={% static "js/jquery-3.3.1.js" %}></script>
+    <script src={% static "js/jquery-ui.js" %}></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#id_start_date").datepicker(
+                {
+                    showAnim: 'slide',
+                    dateFormat: 'dd/mm/yy',
+                    changeMonth: true,
+                    changeYear: true,
+                });
+
+            $("#id_end_date").datepicker(
+                {
+                    showAnim: 'slide',
+                    dateFormat: 'dd/mm/yy',
+                    changeMonth: true,
+                    changeYear: true,
+                });
+        });
+
+    </script>
+{% endblock %}
+
+{% block style %}
+
+    <style>
+        .contract label, .extra label {
+            color: black;
+            float: left;
+            width: 6em;
+            text-align: right;
+            margin-right: .15em;
+        }
+
+
+        #id_pin, #id_phone, #id_room_no, #id_term,
+        #id_start_date, #id_end_date, #id_deposit, #id_deduct, #id_cum_ovd, #id_adjust, #id_photo,
+        #id_username, #id_first_name, #id_last_name, #id_password1, #id_password2 {
+            width: 10em;
+            background-color: lightblue;
+            margin-top: 0;
+        }
+
+        .contract fieldset {
+            width: 20em;
+            height: 20em;
+            float: left;
+            border-radius: 10px;
+        }
+
+        .extra fieldset {
+            border-radius: 10px;
+        }
+
+        .contract legend {
+            color: blue;
+            font-weight: normal;
+            font-size: 125%;
+            margin-bottom: .5em;
+        }
+
+        .extra fieldset {
+            width: 20em;
+            height: 20em;
+        }
+
+        .extra legend {
+            color: blue;
+            font-weight: normal;
+            font-size: 125%;
+            margin-bottom: .5em;
+        }
+
+        #id_photo {
+            font-weight: bold;
+            color: red;
+            width: 16em;
+        }
+
+        .start_d {
+
+            width: 10em;
+            color: red;
+            text-align: center;
+            background: #dad55e;
+        }
+
+        .submit button {
+            width: 9em;
+            font-size: large;
+            background-color: red;
+            border-color: red;
+            border-radius: 15px;
+            color: white;
+            margin-top: .5em;
+            padding: .3em;
+        }
+
+        .submit button:hover {
+            color: black;
+        }
+
+    </style>
+{% endblock %}
+
+
+{% block content %}
+
+    <h2>สร้างบัญชีผู้เช่าใหม่</h2>
+
+    <form action="." method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        <div class="contract">
+            <fieldset>
+
+                <legend>Personal Information</legend>
+
+                {{ tenant_form.errors }}
+
+                <p>
+                    <label for="id_username" id="lb1">Username:</label>
+                    {{ tenant_form.username }}
+                </p>
+
+                <p>
+                    <label for="id_password1" id="lb1">Password1:</label>
+                    {{ tenant_form.password1 }}
+                </p>
+
+                <p>
+                    <label for="id_password2" id="lb1">Password2:</label>
+                    {{ tenant_form.password2 }}
+                </p>
+
+                {{ tenant_profile_form.errors }}
+
+                <p>
+                    <label for="id_first_name" id="lb1">First name:</label>
+                    {{ tenant_form.first_name }}
+                </p>
+
+                <p>
+                    <label for="id_last_name" id="lb1">Last name:</label>
+                    {{ tenant_form.last_name }}
+                </p>
+
+                <p>
+                    <label for="id_pin" id="lb1">Pin:</label>
+                    {{ tenant_profile_form.pin }}
+                </p>
+
+                <p>
+                    <label for="id_phone">Phone:</label>
+                    {{ tenant_profile_form.phone }}
+                </p>
+
+            </fieldset>
+        </div>
+
+        <div class="extra">
+            <fieldset>
+                <legend>Contract Information</legend>
+                {#            #-------------HTML Element-------#}
+                <P>
+                    <label for="id_room_no" id="lb1">Room No:</label>
+                    <select id="id_room_no" name="room_no">
+                        {% for i in vac_rm_set %}
+                            <option>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </p>
+                {#            #-------------------------------#}
+
+                <p>
+                    <label for="id_term">Term:</label>
+                    {{ tenant_profile_form.term }}
+                </p>
+
+                <p>
+                    <label for="id_start_date">Start Date:</label>
+                    {{ tenant_profile_form.start_date }}
+                </p>
+
+                <p>
+                    <label for="id_deposit">Deposit:</label>
+                    {{ tenant_profile_form.deposit }}
+                </p>
+
+                <p>
+                    <label for="id_adjust">Adjust:</label>
+                    {{ tenant_profile_form.adjust }}
+                </p>
+
+                <p>
+                    <label for="id_extra">Extra:</label>
+                    {{ tenant_profile_form.extra }}
+                </p>
+
+            </fieldset>
+        </div>
+
+        <div class="submit">
+
+            <button type="submit">ดำเนินการ</button>
+
+        </div>
+
+    </form>
+
+{% endblock %}
+
+
+

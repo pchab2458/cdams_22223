@@ -1,0 +1,193 @@
+{% extends "app_base_html.html" %}
+{% load static %}
+{% load humanize %}
+{% load ams_tags %}
+
+{% block title %}Update Room Status{% endblock %}
+
+{% block script %}
+
+    <link rel="stylesheet" href={% static "js/jquery-ui.css" %}>
+    <script src={% static "js/jquery-3.3.1.js" %}></script>
+    <script src={% static "js/jquery-ui.js" %}></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $(".exmovein_date").datepicker(
+                {
+                    showAnim: 'slide',
+                    {#dateFormat: 'D: d-M-yy',#}
+                    {#dateFormat:'dd-mm-yy',#}
+                    {#dateFormat:'mm/dd/yy',#}
+                    changeMonth: true,
+                    changeYear: true,
+                });
+        });
+
+    </script>
+{% endblock %}
+
+{% block style %}
+    <style>
+        figure, figcaption {
+            margin: 0;
+            padding: 0;
+        }
+
+        figure {
+        {#border: 1px solid black;#}{#width: 1200px;#}{#padding: 10px;#}{#background-color: lightblue;#}
+        }
+
+        figcaption {
+        {#display: block;#}{#font-weight: bold;#}{#text-align: center;#}{#font-size: 150%;#}{#padding-bottom: .25em;#}{#background-color: yellow;#}
+        }
+
+        table {
+            border-collapse: collapse;
+        {#border: 2px solid black;#}{#margin: 10px auto;#} margin: 0 0;
+
+        {#background-color: yellow;#}
+        }
+
+        thead {
+            padding: .2em .2em;
+            line-height: 1.8em;
+            font-size: 1.2em;
+        }
+
+        #pupdate_rm_status th, td {
+            padding: .2em .2em;
+            line-height: 1.8em;
+        }
+
+        #update_rm_status th:nth-child(1) {
+            text-align: center;
+            background: dodgerblue;
+            color: white;
+            width: 100px;
+        }
+
+        #update_rm_status td:nth-child(1) {
+            text-align: center;
+            color: black;
+        }
+
+        #update_rm_status th:nth-child(2) {
+            text-align: center;
+            background: dodgerblue;
+            color: white;
+            width: 90px;
+        }
+
+        #update_rm_status td:nth-child(2) {
+            text-align: center;
+            color: black;
+        }
+
+        #update_rm_status th:nth-child(3) {
+
+            width: 3px;
+        }
+
+
+        #update_rm_status th:nth-child(4) {
+            text-align: center;
+            background: mediumaquamarine;
+            width: 100px;
+            color: blue;
+        }
+
+        #update_rm_status td:nth-child(4) {
+            text-align: center;
+            color: red;
+        }
+
+        #update_rm_status th:nth-child(5) {
+            text-align: center;
+            background: mediumaquamarine;
+            color: blue;
+            width: 110px;
+        }
+
+        #update_rm_status td:nth-child(5) {
+            text-align: center;
+            color: red;
+
+        }
+
+        .submit button {
+            width: 7em;
+
+            font-size: large;
+            background-color: red;
+            border-color: red;
+            border-radius: 15px;
+            color: white;
+            margin-top: .5em;
+            padding: .3em;
+        }
+
+        .submit button:hover {
+            color: black;
+        }
+
+
+        .status {
+            font-family: "helvetica", "Verdana", "Arial Narrow", "Arial", "Times New Roman", "Courier New", sans-serif;
+            font-size: 1.2em;
+            text-align: center;
+        {#line-height: 1.8em;#} background: lightcyan;
+            color: red;
+            width: 120px;
+
+        }
+
+        .exmovein_date {
+            font-family: "helvetica", "Verdana", "Arial Narrow", "Arial", "Times New Roman", "Courier New", sans-serif;
+            font-size: 1.1em;
+            text-align: center;
+            background: papayawhip;
+            color: blue;
+            width: 120px;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <h2>จองห้องพัก</h2>
+
+    <form action="." method="post">
+        {% csrf_token %}
+        <div id="update_rm_status">
+            <table>
+                <thead>
+                <tr>
+                    <th>เบอร์ห้อง</th>
+                    <th>ราคา</th>
+                    <th></th>
+                    <th>สถานะ</th>
+                    <th>วันจะเข้าพัก</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>{{ rmn }}</td>
+                    <td>{{ room_rate|floatformat:0|intcomma }}</td>
+                    <td></td>
+                    <td>{{ book_room_form.status }}</td>
+                    <td>{{ book_room_form.exmovein_date }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="submit">
+            <button type="submit">ดำเนินการ</button>
+        </div>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "app_base_html.html" %}
+{% load static %}
+
+{% block title %}Admin page{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block style %}
+
+    <style>
+
+        #topic ul a {
+            list-style-type: disc;
+            color: blue;
+            font-size: larger;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        #topic ul a:hover {
+            color: limegreen;
+            font-weight: bold;
+        }
+
+        #topic ul #del a {
+            color: red;
+            font-weight: bold;
+        }
+
+        #topic ul #del a:hover {
+            color: black;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+    <h2>รายการ</h2>
+
+    <div id="topic">
+        <ul>
+            <li><p><a href="{% url 'pre_create_new_account' %}">สร้างบัญชีสำหรับผู้เช่าใหม่(Excel)</a></p></li>
+            <li id="del"><p><a href="{% url 'user_list_to_delete' %}">ลบผู้เช่าออกจากระบบ</a></p></li>
+            <li id="reg"><p><a href="{% url 'register' %}">เพิ่ม Users</a></p></li>
+            <li id="cpw"><p><a href="{% url 'password_change' %}">เปลี่ยน Password</a></p></li>
+        </ul>
+    </div>
+
+{% endblock %}

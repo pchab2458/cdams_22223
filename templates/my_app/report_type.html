@@ -1,0 +1,42 @@
+{% extends "app_base_html.html" %}
+{% load static %}
+
+{% block title %}Report types{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block style %}
+    <style>
+
+        #topic ul {
+            list-style-type: disc;
+            color: red;
+            font-size: larger;
+            font-weight: bold;
+        }
+
+        #topic ul a {
+            color: blue;
+            font-weight: bold;
+        }
+
+        #topic ul a:hover {
+            color: red;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h2>รายการ:</h2>
+    <div id="topic">
+        <ul>
+            <li><p><a href="{% url "report_parameters" %}">สรุปรายได้ประจำเดือน</a></p></li>
+            <li><p><a href="{% url 'current_tenants' %}">ผู้เช่าปัจจุบัน</a></p></li>
+            <li><p><a href="{% url 'vacant_rooms' %}">รายการห้องว่าง</a></p></li>
+            <li><p><a href="{% url 'room_type_rate' %}">ประเภทของห้องพร้อมราคา</a></p></li>
+            <li><p><a href="{% url 'extra_rates' %}">รายการอื่นๆ พร้อมราคา</a></p></li>
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends 'app_base_html.html' %}
+{% load static %}
+{% load humanize %}
+{% load ams_tags %}
+
+{% block title %}Vacant Rooms{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block style %}
+
+    <style>
+        figure, figcaption {
+            margin: 0;
+            padding: 0;
+        }
+
+        figure {
+        {#border: 1px solid black;#}{#width: 1000px;#}{#padding: 10px;#}{#background-color: lightblue;#}
+        }
+
+        figcaption {
+        {#display: block;#}{#font-weight: bold;#}{#text-align: center;#}{#font-size: 150%;#}{#padding-bottom: .25em;#}{#background-color: yellow;#}
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 0;
+        }
+
+        tr:nth-child(even) {
+            background-color: lightblue;
+        }
+
+        thead {
+            background-color: dodgerblue;
+            color: white;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        th {
+            padding: .2em .2em;
+        }
+
+        td {
+            padding: .2em .2em;
+        }
+
+
+        th:nth-child(1) {
+            text-align: center;
+            width: 80px;
+        }
+
+        td:nth-child(1) {
+            text-align: center;
+            color: black;
+        }
+
+        th:nth-child(2) {
+            text-align: center;
+            width: 80px;
+        }
+
+        td:nth-child(2) {
+            text-align: center;
+        }
+
+        th:nth-child(3) {
+            text-align: center;
+            width: 80px;
+        }
+
+        td:nth-child(3) {
+            text-align: center;
+        }
+
+        th:nth-child(4) {
+            text-align: center;
+            width: 98px;
+        }
+
+        td:nth-child(4) {
+            text-align: center;
+        }
+
+        td a {
+
+            color: blue;
+            font-weight: bold;
+        }
+
+        td a:hover {
+            color: red;
+        }
+
+        .reserved {
+            color: red;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <h2>ห้องว่างทั้งหมด {{ no_of_vac_room }} ห้อง [ณ. {{ current_dt|date:'d-m-y' }} {{ current_dt|time:'H:i:s' }}] </h2>
+
+    <figure>
+        {#        <figcaption id="top">Monthly Billing</figcaption>#}
+        <table>
+            <thead>
+            <tr>
+                <th>เบอร์ห้อง</th>
+                <th>ราคา</th>
+                <th>สถานะ</th>
+                <th>วันจะเข้าพัก</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {% for rn in svac_rm_set %}
+                <tr>
+                <td><a href="{{ rn.get_absolute_url }}"> {{ rn.room_no }}</a></td>
+                <td>{{ rn.room_type.rate|floatformat:0|intcomma }}</td>
+                <td>{{ rn.status }}</td>
+                <td {% if res == "yes" %}class="reserved"{% endif %}>{{ rn.exmovein_date|date:'d-m-y' }}
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {#        <figcaption id="bottom">Total Sales by Book</figcaption>#}
+    </figure>
+{% endblock %}

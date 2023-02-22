@@ -1,0 +1,140 @@
+{% extends 'app_base_html.html' %}
+{% load static %}
+
+{% load ams_tags %}
+
+{% block title %}Create Bills{% endblock %}
+
+{% block style %}
+
+    <style>
+
+        table {
+            border-collapse: collapse;
+            margin: 0 0;
+        }
+
+        tr:nth-child(even) {
+        {#background-color: darkseagreen;#}
+        }
+
+
+        thead {
+            background-color: #1586de;
+            color: white;
+            line-height: 1.8;
+        }
+
+        th, td {
+        {#padding: .2em .2em;#} padding: .15em .15em;
+            text-align: center;
+            width: 45px;
+        }
+
+        th:nth-child(1) {
+            text-align: center;
+            width: 180px;
+        {#color: red;#}
+        }
+
+        td:nth-child(1) {
+            text-align: left;
+            color: blue;
+
+        }
+
+
+        th:nth-child(3) {
+
+            background-color: red;
+            color: white;
+        }
+
+        td:nth-child(3) {
+
+            color: red;
+
+        }
+
+
+        th:nth-child(4) {
+            text-align: center;
+            width: 20px;
+        {#color: red;#}
+        }
+
+        td:nth-child(4) {
+            text-align: left;
+            color: blue;
+
+        }
+
+
+        .eu, .wu, .mc {
+            width: 7em;
+            text-align: center;
+            color: red;
+            background-color: lightskyblue;
+            margin-left: .25em;
+
+            line-height: 1em;
+        }
+
+
+        .submit button {
+            width: 7em;
+            font-size: large;
+            background-color: red;
+            border-color: red;
+            border-radius: 15px;
+            color: white;
+            margin-top: .5em;
+            padding: .3em;
+        }
+
+        .submit button:hover {
+            color: black;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <h2>บิลที่ต้องออกทั้งหมด {{ total_tn }} บิล [ณ. {{ cur_date|date:'d-m-y' }} {{ cur_date|time:'H:i:s' }}] </h2>
+
+    <form action="." method="post">
+        {% csrf_token %}
+
+        <div id="create_bill">
+            <table>
+                <thead>
+                <tr>
+                    <th>ชื่อ</th>
+                    <th>เบอร์โทร.</th>
+                    <th>ห้อง</th>
+                    <th>ค่าไฟฟ้า</th>
+                    <th>ค่าน้ำ</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for t in tpf_billForm_list %}
+                    <tr>
+                        <td>{{ t.0.tenant }}</td>
+                        <td>{{ t.0.phone }}</td>
+                        <td>{{ t.0.room_no.room_no }}</td>
+                        <td>{{ t.1.elec_unit }}</td>
+                        <td>{{ t.1.water_unit }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="submit">
+            <button type="submit">ออกบิล</button>
+        </div>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "app_base_html.html" %}
+{% load static %}
+
+{% block title %}Misc Contents{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block style %}
+    <style>
+        #topic ul {
+            list-style-type: disc;
+            color: red;
+            font-size: larger;
+            font-weight: bold;
+        }
+
+        #topic a {
+            color: blue;
+            text-decoration: none;
+        }
+
+        #topic a:hover {
+            color: green;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        li#manage_us a {
+            color: red;
+        }
+
+        li#manage_us a:hover {
+            color: green;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h2>รายการ:</h2>
+
+    <div id="topic">
+
+        <ul>
+            <li id="manage_us"><p><a href="{% url 'manage_users' %}">จัดการเกี่ยวกับผู้เช่า</a></p></li>
+            <li><p><a href="{% url 'issue_bill_excel' %}">ออกบิล(Excel)</a></p></li>
+            <li><p><a href="{% url 'maintenance_charge' %}">ค่าบริการซ่อมแซม</a></p></li>
+        </ul>
+    </div>
+{% endblock %}

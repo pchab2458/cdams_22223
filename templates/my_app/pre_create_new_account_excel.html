@@ -1,0 +1,151 @@
+{% extends "app_base_html.html" %}
+{% load static %}
+
+{% block title %}Pre-create_new_acc_excel{% endblock %}
+
+
+{% block style %}
+
+    <style>
+
+        table {
+            border-collapse: collapse;
+            margin: 0 0;
+        }
+
+        tr:nth-child(even) {
+            background-color: darkseagreen;
+        }
+
+
+        thead {
+            background-color: #1586de;
+            color: white;
+            line-height: 1.8;
+        }
+
+        th, td {
+            padding: .15em .15em;
+            text-align: center;
+        }
+
+        th:nth-child(1) {
+            text-align: center;
+            color: white;
+            width: 200px;
+        }
+
+        td:nth-child(1) {
+            text-align: left;
+            color: blue;
+
+
+        }
+
+        th:nth-child(2) {
+            text-align: center;
+            color: white;
+            width: 90px;
+        }
+
+        td:nth-child(2) {
+            text-align: center;
+            color: blue;
+        }
+
+
+        th:nth-child(3) {
+            text-align: center;
+            color: white;
+            width: 90px;
+        }
+
+        td:nth-child(3) {
+            text-align: center;
+            color: blue;
+        }
+
+
+        th:nth-child(4) {
+            text-align: center;
+            color: white;
+            width: 90px;
+        }
+
+        td:nth-child(4) {
+            text-align: center;
+            color: blue;
+        }
+
+
+        .submit button {
+            width: 7em;
+            font-size: large;
+            background-color: red;
+            border-color: red;
+            border-radius: 15px;
+            color: white;
+            margin-top: .5em;
+            padding: .3em;
+        }
+
+        .submit button:hover {
+            color: black;
+        }
+
+    </style>
+{% endblock %}
+
+
+
+
+{% block script %}
+{% endblock %}
+
+
+
+{% block content %}
+    <h2>ผู้เช่าใหม่รอเข้าระบบ ทั้งหมด {{ no_of_new_tenant }} คน</h2>
+
+    <form action="{% url 'create_new_account_excel' %}" method="post">
+        {% csrf_token %}
+
+        <div id="new_user">
+            <table>
+                <thead>
+                <tr>
+                    <th>ชื่อผู้เช่าใหม่</th>
+                    <th>เบอร์ห้อง</th>
+                    <th>เบอร์โทร.</th>
+                    <th>วันเข้ารพัก</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {#                {% for v in new_user_dict.values %}#}
+                {% for v in new_tenant_d.values %}
+                    <tr>
+                        <td>{{ v.3 }}</td>
+                        <td>{{ v.0 }}</td>
+                        <td>{{ v.5 }}</td>
+                        <td>{{ v.8|date:'d-M-y' }}</td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="submit">
+            <button type="submit">เอาเข้าระบบ</button>
+        </div>
+    </form>
+
+{#    <br>#}
+{#    {% for k,v in new_tenant_d.items %}#}
+{#        <p>{{ k }}: {{ v }}</p>#}
+{#    {% endfor %}#}
+
+
+{% endblock %}
+

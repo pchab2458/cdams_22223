@@ -1,0 +1,119 @@
+{% extends "app_base_html.html" %}
+
+{% load static %}
+{#{% load widget_tweaks %}#}
+
+{% block title %}New maintenance charge{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+
+{% block style %}
+    <style>
+
+        #content {
+            font: 90% Arial, Helvetica, sans-serif;
+            width: 95%;
+            padding: 2em;
+            margin: 2px;
+        }
+
+        #lb1, #lb2 {
+            display: block;
+
+            padding: 1px 5px 1px 1px;
+            color: white;
+            width: 5em;
+
+            line-height: 1.8em;
+
+            font-size: 110%;
+            font-weight: normal;
+            text-align: right;
+            margin-right: .25em;
+            background-color: green;
+            float: left;
+            clear: both;
+
+        }
+
+        .ma_cost #id_room_no,
+        .ma_cost #id_job_cost {
+            width: 6em;
+
+            padding: 3px;
+
+            font-size: 110%;
+
+            text-align: center;
+
+            background-color: lightskyblue;
+            margin-top: 0;
+
+            float: left;
+        }
+
+        .ma_cost fieldset {
+            width: 15em;
+            height: 9em;
+
+            border-radius: 8px;
+        }
+
+        .ma_cost legend {
+            color: blue;
+            font-weight: bold;
+            font-size: 140%;
+            margin-bottom: .5em;
+        }
+
+        .submit button {
+            width: 5.5em;
+            font-size: large;
+            background-color: red;
+            border-color: red;
+            border-radius: 15px;
+            color: white;
+            margin-top: .5em;
+            padding: .3em;
+        }
+
+        .submit button:hover {
+            color: black;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <form action="." method="post">
+
+        {% csrf_token %}
+        <div class="ma_cost">
+            <fieldset>
+                <legend>ค่าบริการ ซ่อมแซม</legend>
+                <label for="id_room_no" id="lb1">ห้อง:</label>
+                <select id="id_room_no" name="room_no">
+                    {% for i in occupied_rm %}
+                        <option>{{ i }}</option>
+                    {% endfor %}
+                </select>
+                <br><br><br>
+                <label for="id_job_cost" id="lb2">ราคา:</label>
+                <input type="number" name="job_cost" id="id_job_cost" min="0" placeholder="บาท" step="any">
+            </fieldset>
+        </div>
+
+        <div class="submit">
+            <button type="submit">ดำเนินการ</button>
+        </div>
+
+    </form>
+
+{% endblock %}
+
+
+

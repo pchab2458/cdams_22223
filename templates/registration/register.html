@@ -1,0 +1,21 @@
+{% extends "auth_base_html.html" %}
+
+{% load static %}
+{% block title %}Create new user{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+    <h1>Create new user</h1>
+{#        <p>Please sign up using the following form:</p>#}
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Create new user"></p>
+    </form>
+
+{% endblock %}

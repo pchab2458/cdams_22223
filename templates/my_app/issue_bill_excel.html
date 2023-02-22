@@ -1,0 +1,24 @@
+{% extends "app_base_html.html" %}
+{% load static %}
+
+{% block title %}Issue_bill_excel{% endblock %}
+
+
+{% block script %}
+{% endblock %}
+
+
+
+{% block content %}
+    {#    <h2>Issue Bills</h2>#}
+
+    <P>Electricity & Water consumption by ROOM:</P>
+    <p>Building A Elec&Water Consumption:</p>
+    <P>{{ bld1_elec_water_consump_dict }}</P>
+    <br>
+    <p>Building B Elec&Water Consumption:</p>
+    <p>{{ bld2_elec_water_consump_dict }}</p>
+    <br>
+
+{% endblock %}
+

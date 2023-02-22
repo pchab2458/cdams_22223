@@ -1,0 +1,50 @@
+{% extends "app_base_html.html" %}
+{% load static %}
+
+{% block title %}User_delete_form{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block style %}
+    <style>
+        p {
+            line-height: .4;
+        }
+
+        #del_form a {
+            color: black;
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        #del_form a:hover {
+            color: red;
+        }
+
+        #del_form #rmno {
+            color: red;
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    {% if tenantprofiles.count %}
+        <h1>มีผู้เช่าในระบบทั้งหมด {{ tenantprofiles.count }} คน เลื่อกเพื่อลบออก ...</h1>
+    {% else %}
+        <h1>Existing users [{{ current_date_time|date:'d-M-y' }} {{ current_date_time|time:'H:i:s' }} = {{ tenantprofiles.count }}]</h1>
+    {% endif %}
+
+    <div id="del_form">
+        {% for k,v in dict.items %}
+            <p><a href="{% url "confirm_delete_user" k %}">
+                <span id="rmno">{{ k }}</span>
+                {{ v }} </a></p>
+        {% endfor %}
+    </div>
+
+{% endblock %}

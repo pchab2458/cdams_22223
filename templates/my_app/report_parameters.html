@@ -1,0 +1,138 @@
+{% extends "app_base_html.html" %}
+{% load static %}
+
+{% block title %}Report Parameters{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block style %}
+
+    <style>
+        fieldset {
+
+            font-family: "Verdana", "helvetica", "Times New Roman", "Courier New", "Arial", sans-serif;
+            color: gray;
+            width: 14em;
+            font-weight: bold;
+            border-radius: 20px;
+            padding-left: 45px;
+            padding-top: 20px;
+        }
+
+        fieldset legend {
+            color: gray;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        fieldset label {
+            color: blue;
+            width: 2em;
+            text-align: left;
+            margin-right: 1.5em;
+            float: left;
+        }
+
+        #bld {
+            display: block;
+            width: 6em;
+            color: white;
+            background-color: brown;
+            text-align: center;
+            font-size: medium;
+        }
+
+        #month {
+            display: block;
+            width: 6em;
+            color: white;
+            background-color: rebeccapurple;
+            text-align: center;
+            font-size: medium;
+        }
+
+        #year {
+            display: block;
+            width: 6em;
+            color: white;
+            background-color: green;
+            text-align: center;
+            font-size: medium;
+        }
+
+        .submit button {
+            width: 7em;
+            font-size: large;
+            background-color: red;
+            border-color: red;
+            border-radius: 15px;
+            color: white;
+            margin-top: .5em;
+            padding: .3em;
+        }
+
+        .submit button:hover {
+            color: black;
+        }
+
+    </style>
+{% endblock %}
+
+
+{% block content %}
+
+    <h2>สรุปรายได้ประจำเดือน</h2>
+
+    <form action="{% url 'monthly_report' %}" method="post">
+
+        {% csrf_token %}
+
+        <fieldset>
+            <legend>เลือกเงื่อนไฃที่ต้องกาว</legend>
+
+            <label for="bld">ตึก:</label>
+            <select id="bld" name="bld">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="AB">AB</option>
+            </select><br>
+
+            <label for="month">เดือน:</label>
+            <select id="month" name="month">
+                <option value="1">JAN</option>
+                <option value="2">FEB</option>
+                <option value="3">MAR</option>
+                <option value="4">APR</option>
+                <option value="5">MAY</option>
+                <option value="6">JUN</option>
+                <option value="7">JUL</option>
+                <option value="8">AUG</option>
+                <option value="9">SEP</option>
+                <option value="10">OCT</option>
+                <option value="11">NOV</option>
+                <option value="12">DEC</option>
+            </select><br>
+
+            <label for="year">ปี:</label>
+            <select id="year" name="year">
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+            </select><br>
+
+        </fieldset>
+
+        <div class="submit">
+            <button type="submit">แสดงรายงาน</button>
+        </div>
+    </form>
+{% endblock %}

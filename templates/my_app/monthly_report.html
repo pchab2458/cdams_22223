@@ -1,0 +1,154 @@
+{% extends 'app_base_html.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Create Table{% endblock %}
+
+{% block style %}
+    <style>
+
+        table {
+            border-collapse: collapse;
+            margin: 0;
+        }
+
+        thead, tfoot {
+            background-color: mediumseagreen;
+            text-align: right;
+            color: white;
+            line-height: 1.5;
+        }
+
+        th, td {
+            padding: .2em .2em;
+            text-align: right;
+        }
+
+        tr:nth-child(even) {
+            background-color: palegreen;
+        }
+
+
+        th:nth-child(1) {
+            text-align: center;
+        {#width: 230px;#}
+
+        }
+
+        th:nth-child(2) {
+            text-align: center;
+            width: 50px;
+        }
+
+        th:nth-child(3) {
+            text-align: right;
+            width: 55px;
+        }
+
+
+        th:nth-child(4), th:nth-child(5),
+        th:nth-child(7), th:nth-child(8) {
+
+            text-align: right;
+            width: 52px;
+        }
+
+        th:nth-child(11) {
+            text-align: right;
+            width: 66px;
+        }
+
+        th:nth-child(12) {
+            text-align: right;
+            width: 66px;
+        }
+
+
+        td:nth-child(1) {
+            text-align: left;
+        }
+
+        td:nth-child(2) {
+            text-align: center;
+        }
+
+
+        tfoot td:nth-child(1), td:nth-child(2) {
+            text-align: center;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    {% if closed_bills.count != 0 %}
+
+        <h2>รายได้ ตึก {{ bld }} งวดเดือน {{ thai_bd_m }} {{ thai_bd_y }}
+            [บิลรอชำระ <span style="color: red">{{ open_bill_in_report_month.count }}</span> บิล
+            จาก {{ total_bill_in_report_month.count }} บิล]
+        </h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th class="left">Name</th>
+                <th>Room</th>
+                <th>RCAC</th>
+                <th>EC</th>
+                <th>WC</th>
+                <th>CSC</th>
+                <th>OSC</th>
+                <th>OVD</th>
+                <th>LF</th>
+                <th>MC</th>
+                <th>TOTAL</th>
+                <th>P_AMT</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for i in closed_bill_in_report_month %}
+                <tr>
+                    <td class="left">{{ i.tenant_name }}</td>
+                    <td>{{ i.room_no }}</td>
+                    <td>{{ i.room_cost|add:i.room_acc_cost|add:i.adjust|floatformat:0|intcomma }}</td>
+                    <td>{{ i.electricity_cost|floatformat:0|intcomma }}</td>
+                    <td>{{ i.water_cost|floatformat:0|intcomma }}</td>
+                    <td>{{ i.common_ser_cost|floatformat:0|intcomma }}</td>
+                    <td>{{ i.other_ser_cost|floatformat:0|intcomma }}</td>
+                    <td>{{ i.overdue_amount|floatformat:0|intcomma }}</td>
+                    <td>{{ i.late_fee|add:i.maint_cost|floatformat:0|intcomma }}</td>
+                    <td>{{ i.maint_cost|add:i.maint_cost|floatformat:0|intcomma }}</td>
+                    <td>{{ i.bill_total|floatformat:0|intcomma }}</td>
+                    <td>{{ i.payment_amount|floatformat:0|intcomma }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+            <tfoot>
+            <tr>
+                <td class="left">Total</td>
+                <td>All</td>
+                <td>{{ trcac|floatformat:0|intcomma }}</td>
+                <td>{{ tec|floatformat:0|intcomma }}</td>
+                <td>{{ twc|floatformat:0|intcomma }}</td>
+                <td>{{ tcsc|floatformat:0|intcomma }}</td>
+                <td>{{ tosc|floatformat:0|intcomma }}</td>
+                <td>{{ tovd|floatformat:0|intcomma }}</td>
+                <td>{{ tlf|floatformat:0|intcomma }}</td>
+                <td>{{ tmc|floatformat:0|intcomma }}</td>
+                <td>{{ tbt |floatformat:0|intcomma }}</td>
+                <td>{{ tpa |floatformat:0|intcomma }}</td>
+            </tr>
+            </tfoot>
+
+        </table>
+
+    {% else %}
+
+
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="shortcut icon" href={% static "pics/icon_globe_12195.png" %}>
+    <link href="{% static "css/app_parent_css.css" %}" rel="stylesheet">
+
+
+    {% block script %}
+    {% endblock %}
+
+    <style>
+        body, html {
+
+            background-image: url("/static/pics/bg1_2.jpg");
+            height: 100%;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+
+    {% block style %}
+    {% endblock %}
+
+</head>
+
+
+<body>
+<div id="header">
+
+    <span class="logo">Chollada Apartment</span>
+
+    {% if request.user.is_authenticated and request.user.last_name in 'Bootwicha, Admin' %}
+
+        <ul class="menu">
+            <li {% if section == "new_contract" %}class="selected"{% endif %}>
+                <a href="{% url "create_contract" %}">บัญชีใหม่</a>
+            </li>
+
+            <li {% if section == "billing" %}class="selected"{% endif %}>
+                <a href="{% url "billing" %}">ออกบิล</a>
+            </li>
+
+            <li {% if section == "month_bills" %}class="selected"{% endif %}>
+                <a href="{% url "month_bills" %}">ชำระบิล</a>
+            </li>
+
+            <li {% if section == "report" %}class="selected"{% endif %}>
+                <a href="{% url "report_type" %}">รายงาน</a>
+            </li>
+
+
+            <li {% if section == "misc" %}class="selected"{% endif %}>
+                <a href="{% url "misc_contents" %}">รายการอึ่น</a>
+            </li>
+
+
+
+
+        </ul>
+
+    {% else %}
+
+        <ul class="menu">
+            <li {% if section == "tenant_profile" %}class="selected"{% endif %}>
+                <a href="{% url "tenant_profile" %}">ข้อมูลผู้เช่า</a>
+            </li>
+
+            <li {% if section == "tenant_bill" %}class="selected"{% endif %}>
+                <a href="{% url "tenant_bill" %}">รายการค่าบริการ</a>
+            </li>
+
+
+            <li {% if section == "tenant_info" %}class="selected"{% endif %}>
+                <a href="{% url "tenant_info" %}">ข้อมูลที่ควรทราบ</a>
+            </li>
+
+        </ul>
+
+    {% endif %}
+
+    <span class="user">
+      {% if request.user.is_authenticated %}
+
+          <span id="hello">สวัสดี คุณ {{ request.user.first_name }}, </span>
+          <a href="{% url "logout" %}">Logout </a>
+
+      {% else %}
+          <a href="{% url "login" %}">Log-in</a>
+      {% endif %}
+    </span>
+
+</div>
+
+{## END OF HEADER =================================================================================#}
+
+<div id="message">
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message|safe }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</div>
+
+{## END OF MESSAGE =================================================================================#}
+
+
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+
+{## END OF CONTENT =================================================================================#}
+
+</body>
+
+</html>

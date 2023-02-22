@@ -1,0 +1,113 @@
+{% extends 'app_base_html.html' %}
+{% load static %}
+{%  load humanize %}
+{% load ams_tags %}
+
+{% block title %}Extra Rates{% endblock %}
+
+{% block style %}
+
+    <style>
+        figure, figcaption {
+            margin: 0;
+            padding: 0;
+        }
+
+        figure {
+        {#border: 1px solid black;#}{#width: 1000px;#}{#padding: 10px;#}{#background-color: lightblue;#}
+        }
+
+        figcaption {
+        {#display: block;#}{#font-weight: bold;#}{#text-align: center;#}{#font-size: 150%;#}{#padding-bottom: .25em;#}{#background-color: yellow;#}
+        }
+
+
+        table {
+            border-collapse: collapse;
+            margin: 0 0;
+        }
+
+        tr:nth-child(even) {
+            background-color: lightblue;
+        }
+
+        thead {
+            background-color: mediumseagreen;
+            color: white;
+            line-height: 1.8;
+            font-size: 120%;
+        }
+
+        thead th {
+            text-align: right;
+        }
+
+        th,td {
+            padding: .2em .4em;
+        }
+
+        th:nth-child(1) {
+            text-align: left;
+            width: 180px;
+        }
+
+        th:nth-last-child(1) {
+            text-align: right;
+            width: 45px;
+        }
+
+        td:nth-child(1) {
+            text-align: left;
+        }
+
+        td:nth-last-child(1) {
+            text-align: right;
+        }
+
+        td a.ew {
+
+            color: red;
+            font-weight: bold;
+        }
+
+        td a:hover {
+            color: blue;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <h2>รายการเพิ่มเติม พร้อมราคา [ณ. {{ current_dt|date:'d-m-y' }} {{ current_dt|time:'H:i:s' }}]</h2>
+
+    <figure>
+        {#        <figcaption id="top">Monthly Billing</figcaption>#}
+        <table>
+            <thead>
+            <tr>
+                <th>รายละเอียด</th>
+                <th>ราคา</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in extra %}
+                <tr>
+                    {% if i.description in 'Electricity CPU' %}
+                        <td>{{ i.description }}</td>
+                        <td><a class="ew" href="{% url 'elec_cpu_change' %}">{{ i.cpu|floatformat:2|intcomma }}</a></td>
+                    {% elif i.description in 'Water CPU' %}
+                        <td>{{ i.description }}</td>
+                        <td><a class="ew" href="{% url 'water_cpu_change' %}">{{ i.cpu|floatformat:2|intcomma }}</a></td>
+                    {% else %}
+                        <td>{{ i.description }}</td>
+                        <td>{{ i.cpu|floatformat:0|intcomma }}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {#        <figcaption id="bottom">Total Sales by Book</figcaption>#}
+    </figure>
+{% endblock %}

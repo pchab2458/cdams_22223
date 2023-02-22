@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="shortcut icon" href={% static "pics/icon_globe_12195.png" %}>
+    <link href="{% static "css/auth_parent_css.css" %}" rel="stylesheet">
+
+    {% block script %}
+    {% endblock %}
+
+    <style>
+
+        body, html {
+        {#background-image: url("/static/pics/bg1.jpg");#} background-image: url("/static/pics/bg1_2.jpg");
+            height: 100%;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+    </style>
+
+    {% block style %}
+    {% endblock %}
+
+</head>
+<body>
+
+<div id="header">
+    <span class="logo">Chollada Apartment Authentication</span>
+</div>
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message|safe }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

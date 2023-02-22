@@ -1,0 +1,146 @@
+{% extends 'app_base_html.html' %}
+{% load static %}
+{% load humanize %}
+{% load ams_tags %}
+
+{% block title %}Current tenants{% endblock %}
+
+{% block style %}
+    <style>
+
+        table {
+            border-collapse: collapse;
+            margin: 0;
+        }
+
+        thead {
+            background-color: darkorchid;
+            text-align: right;
+            color: white;
+            line-height: 1.5;
+        }
+
+        th, td {
+            padding: .2em .2em;
+            text-align: right;
+            {#width: 45px;#}
+        }
+
+        tr:nth-child(even) {
+            background-color: thistle;
+        }
+
+        thead th:nth-child(11), tfoot td:nth-child(11) {
+            width: 75px;
+
+        }
+
+
+        thead th:nth-child(1) {
+            text-align: center;
+            width: 45px;
+        }
+
+        thead th:nth-child(2) {
+            text-align: center;
+            {#width: 230px;#}
+        }
+
+        thead th:nth-child(3) {
+            text-align: center;
+            width: 65px;
+        }
+
+        thead th:nth-child(4) {
+            text-align: right;
+            width: 55px;
+        }
+
+        thead th:nth-child(5) {
+            text-align: right;
+            width: 55px;
+        }
+
+        thead th:nth-child(6) {
+            text-align: right;
+            width: 55px;
+        }
+
+        thead th:nth-child(8) {
+            text-align: right;
+            width: 55px;
+        }
+
+        tbody td:nth-child(1) {
+            text-align: center;
+        }
+
+        tbody td:nth-child(2) {
+            text-align: left;
+        }
+
+        tbody td:nth-child(3) {
+            text-align: center;
+            width: 65px;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <h2>มีผู้เช่าทั้งหมด {{ total_tn }} คน [ณ. {{ current_dt|date:'d-m-y' }} {{ current_dt|time:'H:i:s' }}]</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>RM</th>
+            <th>NAME</th>
+            <th>HP</th>
+            <th>RMC</th>
+            <th>RAC</th>
+{#            <th>OSC</th>#}
+            <th>DEPO</th>
+            <th>ADJ</th>
+            <th>OVD</th>
+            <th>LF</th>
+            <th>MC</th>
+            <th>S_DATE</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in cur_tenant_pfs %}
+            <tr>
+                {#                    <td>{{ i.room_no }}</td>#}
+                {#                    <td>{{ i.tenant }}</td>#}
+                {#                    <td>{{ i.phone }}</td>#}
+                {#                    <td>{{ i.room_no.room_type.rate|floatformat:"0g" }}</td>#}
+                {#                    <td>{% room_acc_cost i.room_no.room_no %}</td>#}
+                {#                    <td>{% room_other_cost i.room_no.room_no %}</td>#}
+                {#                    <td>{{ i.deposit|floatformat:"0g" }}</td>#}
+                {#                    <td>{{ i.adjust|floatformat:"0g" }}</td>#}
+                {#                    <td>{{ i.cum_ovd|floatformat:"0g" }}</td>#}
+                {#                    <td>{{ i.late_fee|floatformat:"0g" }}</td>#}
+                {#                    <td>{{ i.maint_cost|floatformat:"0g" }}</td>#}
+                {#                    <td>{{ i.start_date|date:'d-m-y' }}</td>#}
+
+                {#                    #----------------------------------------#}
+                <td>{{ i.room_no }}</td>
+                <td>{{ i.tenant }}</td>
+                <td>{{ i.phone }}</td>
+                <td>{{ i.room_no.room_type.rate|floatformat:0|intcomma }}</td>
+                <td>{% room_acc_cost i.room_no.room_no %}</td>
+{#                <td>{% room_other_cost i.room_no.room_no %}</td>#}
+                <td>{{ i.deposit|floatformat:0|intcomma }}</td>
+                <td>{{ i.adjust|floatformat:0|intcomma }}</td>
+                <td>{{ i.cum_ovd|floatformat:0|intcomma }}</td>
+                <td>{{ i.late_fee|floatformat:0|intcomma }}</td>
+                <td>{{ i.maint_cost|floatformat:0|intcomma }}</td>
+                <td>{{ i.start_date|date:'d-m-y' }}</td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

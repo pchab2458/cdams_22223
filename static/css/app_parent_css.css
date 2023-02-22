@@ -1,0 +1,201 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    background: lightgray;
+    font-family: "helvetica", "Verdana", "Arial Narrow", "Arial", "Times New Roman", "Courier New", sans-serif;
+}
+
+
+#content {
+    padding: 0 60px;
+    line-height: 100%;
+}
+
+
+#header {
+    padding: 10px 35px;
+    font-size: 18px;
+    /*background: dodgerblue;*/
+    /*border-bottom: 5px solid skyblue;*/
+    background: mediumseagreen;
+    border-bottom: 5px solid yellowgreen;
+    color: #fff;
+    overflow: auto;
+}
+
+
+#header a {
+    color: #f3f7cc;
+    text-decoration: none;
+}
+
+#header a:hover {
+    color: black;
+}
+
+
+#header .logo {
+    font-family: "Verdana", "Arial", "helvetica", "Courier New", sans-serif;
+    float: left;
+    color: blue;
+    font-size: 25px;
+    margin-right: 30px;
+}
+
+
+#header ul.menu {
+    list-style: none;
+    float: left;
+    margin: 0;
+    margin-top: 4px;
+    padding: 0;
+}
+
+#header ul.menu li {
+    float: left;
+    padding-right: 18px;
+}
+
+#header ul.menu li.selected a {
+    color: blue;
+}
+
+#header ul.menu li.selected a:hover {
+    color: #ea0b0b;
+    /*font-style: italic;*/
+}
+
+
+#header .user {
+    float: right;
+    padding-top: 0;
+    margin-top: 5px;
+    color: blue;
+}
+
+
+/*===== added from app_body======*/
+
+
+p {
+    /*line-height: .7;*/
+}
+
+a {
+    color: #12c064;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #00a74f;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Muli', sans-serif;
+    font-weight: normal;
+
+}
+
+h1 {
+    border-bottom: 1px solid cadetblue;
+    padding: 0 0 15px 0;
+    margin: 20px 0 15px 0;
+    color: blue;
+}
+
+h2 {
+    border-bottom: 1px solid cadetblue;
+    padding: 0 0 15px 0;
+    margin: 15px 0 15px 0;
+    color: blue;
+}
+
+
+/* messages */
+
+#message {
+    margin: 0 60px 0 23px;
+    padding: 0 0 0 0;
+    font-size: 120%;
+}
+
+
+ul.messages {
+    list-style-type: none;
+}
+
+ul.messages li.success,
+ul.messages li.warning,
+ul.messages li.error,
+ul.messages li.info {
+    list-style: none;
+}
+
+ul.messages li.success {
+    /*background: lightgreen;*/
+    color: green;
+    padding: 2px 0;
+}
+
+ul.messages li.success a {
+    /*background: lightgreen;*/
+    color: green;
+    padding: 2px 0;
+
+}
+
+ul.messages li.error {
+    /*background: yellow;*/
+    color: red;
+    padding: 2px 0;
+
+}
+
+ul.messages li.error a {
+    color: #e9828e;
+    padding: 2px 0;
+}
+
+ul.messages li.info {
+    /*background: lightskyblue;*/
+    color: blue;
+    padding: 2px 0;
+}
+
+ul.messages li.info a {
+    color: dodgerblue;
+    padding: 2px 0;
+}
+
+ul.messages li.warning {
+    /*background: yellow;*/
+    color: red;
+    padding: 2px 0;
+}
+
+ul.messages li.warning a {
+    color: #f49000;
+    padding: 2px 0;
+}
+
+ul.messages li a.close {
+    margin: 0;
+    float: right;
+    opacity: 1;
+    border: 0;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+
+
+
+
+
+
+
+
+
+

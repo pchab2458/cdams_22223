@@ -1,0 +1,13 @@
+{% load ams_tags %}
+{% load humanize %}
+
+<span class="nam">{{ tenant_bill.tenant_name }} </span>
+<span class="rn">{{ tenant_bill.room_no }}</span>
+<span class="rcac">{{ rm_c_ac_c_plus_adj|floatformat:0|intcomma }}</span>
+<span class="ec">{{ tenant_bill.electricity_cost|floatformat:0|intcomma }}</span>
+<span class="wc">{{ tenant_bill.water_cost|floatformat:0|intcomma }}</span>
+<span class="csc">{{ tenant_bill.common_ser_cost|floatformat:0|intcomma }}</span>
+<span class="osc">{{ tenant_bill.other_ser_cost|floatformat:0|intcomma }}</span>
+<span class="ovd">{{ tenant_bill.overdue_amount|floatformat:0|intcomma }}</span>
+<span class="misc">{{ bill_misc|floatformat:0|intcomma }}</span>
+<span class="bt">{{ tenant_bill.bill_total|floatformat:0|intcomma }}</span>

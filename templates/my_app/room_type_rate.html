@@ -1,0 +1,86 @@
+
+
+{% extends "app_base_html.html" %}
+{% load static %}
+{%  load humanize %}
+{% block title %}Room type and rate{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block style %}
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 1px solid black;
+            white-space: nowrap;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: .2em .7em;
+            text-align: right;
+        }
+
+        thead tr {
+            background-color: darkcyan;
+            line-height: 2em;
+            color: white;
+        }
+
+        tbody tr {
+            line-height: 1.8em;
+            color: black;
+        }
+
+        th:first-child, td:first-child {
+            text-align: left;
+        }
+
+        th:first-child {
+
+            vertical-align: center;
+        }
+
+        th:nth-child(2) {
+            text-align: center;
+        }
+
+        tr:nth-child(1) th {
+            vertical-align: center;
+            text-align: center;
+        {#color: black;#}
+        }
+
+        tfoot tr:nth-child(1) th {
+            text-align: center;
+            vertical-align: center;
+            color: black;
+        }
+
+    </style>
+{% endblock %}
+
+
+{% block content %}
+
+    <h2>รายการห้องพักพร้อมราคา [ณ. {{ current_dt|date:'d-m-y' }}]</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ประเภทห้อง</th>
+            <th>ราคา</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for e in rm_type_rate %}
+            <tr>
+                <td>{{ e.description }}</td>
+                <td>{{ e.rate|floatformat:0|intcomma }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+

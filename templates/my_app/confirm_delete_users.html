@@ -1,0 +1,77 @@
+{% extends "app_base_html.html" %}
+{% load static %}
+
+{% block title %}Delete users{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block style %}
+    <style>
+
+        p {
+            font-family: "helvetica", "Courier New", "Verdana", "Arial", sans-serif;
+            font-size: 25px;
+        }
+
+        p #rmn {
+            color: red;
+            font-weight: bold;
+
+        }
+
+        p #name {
+            color: blue;
+            font-weight: bold;
+        }
+
+        .btn_no {
+            width: 50px;
+            background: mediumseagreen;
+            border: none;
+            border-radius: 45px;
+            color: white;
+            padding: 10px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 5px;
+            cursor: pointer;
+        }
+
+        .btn_yes {
+            width: 50px;
+            background: red;
+            border: none;
+            border-radius: 45%;
+            color: white;
+            padding: 10px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 5px;
+            cursor: pointer;
+        }
+
+        .btn_yes:hover, .btn_no:hover {
+            color: black;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        ลบผู้เช่า <span id="rmn">ห้อง: {{ rmn }}</span> <span id="name">({{ name }})? </span>
+        <a id="no" href={% url "user_list_to_delete" %}><input type="button" class="btn_no" value="NO"></a>
+        <a id="yes" href={% url "delete_user" rmn %}><input type="button" class="btn_yes" value="YES"></a>
+    </p>
+
+{% endblock %}
+
+
+
+

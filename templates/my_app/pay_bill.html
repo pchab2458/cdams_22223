@@ -1,0 +1,187 @@
+{% extends "app_base_html.html" %}
+{% load static %}
+{% load humanize %}
+{% load ams_tags %}
+
+{% block title %}Payment{% endblock %}
+
+{% block script %}
+
+    <link rel="stylesheet" href={% static "js/jquery-ui.css" %}>
+    <script src={% static "js/jquery-3.3.1.js" %}></script>
+    <script src={% static "js/jquery-ui.js" %}></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $(".pay_date").datepicker(
+                {
+                    showAnim: 'slide',
+                    {#dateFormat: 'D: d-M-yy',#}
+                    {#dateFormat:'dd-mm-yy',#}
+                    {#dateFormat:'mm/dd/yy',#}
+                    changeMonth: true,
+                    changeYear: true,
+                });
+        });
+
+    </script>
+
+{% endblock %}
+
+{% block style %}
+    <style>
+        figure, figcaption {
+            margin: 0;
+            padding: 0;
+        }
+
+        figure {
+        {#border: 1px solid black;#}{#width: 1200px;#}{#padding: 10px;#}{#background-color: lightblue;#}
+        }
+
+        figcaption {
+        {#display: block;#}{#font-weight: bold;#}{#text-align: center;#}{#font-size: 150%;#}{#padding-bottom: .25em;#}{#background-color: yellow;#}
+        }
+
+
+        table {
+            border-collapse: collapse;
+        }
+
+
+        #pay_bill th, td {
+            padding: .2em .2em;
+            line-height: 1.8em;
+        }
+
+        #pay_bill th:nth-child(1) {
+            text-align: center;
+            background: dodgerblue;
+            color: white;
+            width: 200px;
+        }
+
+        #pay_bill td:nth-child(1) {
+            text-align: center;
+            color: black;
+        }
+
+        #pay_bill th:nth-child(2) {
+            text-align: center;
+            background: dodgerblue;
+            color: white;
+            width: 75px;
+        }
+
+        #pay_bill td:nth-child(2) {
+            text-align: center;
+            color: red;
+        }
+
+        #pay_bill th:nth-child(3) {
+            text-align: center;
+            background: dodgerblue;
+            color: white;
+            width: 130px;
+        }
+
+        #pay_bill td:nth-child(3) {
+            text-align: center;
+            color: black;
+        }
+
+        #pay_bill th:nth-child(4) {
+            width: 3px;
+        }
+
+
+        #pay_bill th:nth-child(5) {
+            text-align: center;
+            background: green;
+            color: white;
+            width: 120px;
+        }
+
+        #pay_bill th:nth-child(6) {
+            text-align: center;
+            background: green;
+            color: white;
+            width: 120px;
+        }
+
+        .submit button {
+            width: 7em;
+
+            font-size: large;
+            background-color: red;
+            border-color: red;
+            border-radius: 15px;
+            color: white;
+            margin-top: .5em;
+            padding: .3em;
+        }
+
+        .submit button:hover {
+            color: black;
+        }
+
+        .paid_amount {
+            font-family: "helvetica", "Verdana", "Arial Narrow", "Arial", "Times New Roman", "Courier New", sans-serif;
+            font-size: 1em;
+            text-align: center;
+            background: lightcyan;
+            color: black;
+            width: 120px;
+        }
+
+        .pay_date {
+            font-family: "helvetica", "Verdana", "Arial Narrow", "Arial", "Times New Roman", "Courier New", sans-serif;
+            font-size: 1em;
+            text-align: center;
+            background: lavenderblush;
+            color: black;
+            width: 120px;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <h2>ชำระค่าบริการ</h2>
+
+    <form action="." method="post">
+        {% csrf_token %}
+
+        <div id="pay_bill">
+            <table>
+                <thead>
+                <tr>
+                    <th>ชื่อ-สกุล</th>
+                    <th>เบอร์ห้อง</th>
+                    <th>จำนวนที่ต้องจ่าย</th>
+                    <th></th>
+                    <th>จำนวนที่รับ</th>
+                    <th>วันที่รับ</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>{{ tenant_bill.tenant_name }}</td>
+                    <td>{{ tenant_bill.room_no }}</td>
+                    <td>{{ tenant_bill.bill_total|floatformat:0|intcomma }}</td>
+                    <td></td>
+                    <td>{{ pay_form.payment_amount }}</td>
+                    <td>{{ pay_form.payment_date }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="submit">
+            <button type="submit">ดำเนินการ</button>
+        </div>
+    </form>
+{% endblock %}
