@@ -889,7 +889,7 @@ def issue_bill_excel(request):
         water_cpu = 0
 
         for e in tpf_extras:  # one extra obj.
-            if e.description in ['Bed&Mattress', 'Clothing Cupboard', 'Dressing Table', 'TV Table', 'Fridge','Air-Conditioner']:
+            if e.description in ['Bed&Mattress', 'Clothing Cupboard', 'Dressing Table', 'TV Table', 'Fridge', 'Air-Conditioner']:
                 rm_ac_cost += e.cpu
             elif e.description in ['Garbage', 'Wifi', 'Parking']:
                 osc += e.cpu
@@ -920,7 +920,7 @@ def issue_bill_excel(request):
         tpf.late_fee = 0
         tpf.maint_cost = 0
 
-        bill_total = new_bill.room_cost + new_bill.room_acc_cost + new_bill.electricity_cost + new_bill.water_cost + new_bill.common_ser_cost + new_bill.other_ser_cost + new_bill.overdue_amount + new_bill.late_fee + new_bill.maint_cost
+        bill_total = new_bill.room_cost + new_bill.room_acc_cost + new_bill.electricity_cost + new_bill.water_cost + new_bill.common_ser_cost + new_bill.other_ser_cost + new_bill.overdue_amount + new_bill.adjust + new_bill.late_fee + new_bill.maint_cost
 
         new_bill.bill_total = bill_total
 
