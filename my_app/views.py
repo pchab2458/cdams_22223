@@ -810,7 +810,8 @@ def create_new_account_subroutine():
     for tpf in existing_tpf:
         occupied_romno_set.append(tpf.room_no.room_no)  # ['A302', 'B304',..]
 
-    rmno_value_dict = get_excel_data(5, 50, 3, 22, GV.excel_file_new_ac)  # {rmno: [room_no,v1,..]}
+    # Excel data range: min_row: 5, max_row: 56, min_col: 3, max_col: 22
+    rmno_value_dict = get_excel_data(5, 56, 3, 22, GV.excel_file_new_ac)  # {rmno: [room_no,v1,..]}
 
     new_tenat_dict = {}
     for v in rmno_value_dict.values():
