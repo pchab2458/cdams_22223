@@ -878,6 +878,7 @@ def issue_bill_excel(request):
         # CREATE NEW BILL OBJ. for this tenant *************************************************
         new_bill = Billing(bill_ref=bill_ref_str, tenant_name=tpf.tenant, room_no=tpf.room_no)
 
+        # new_bill.room_cost = tpf.room_no.room_type.rate * tpf_multi_factor
         new_bill.room_cost = tpf.room_no.room_type.rate * tpf_multi_factor
 
         tpf_extras = tpf.extra.all()  # QS
@@ -888,7 +889,7 @@ def issue_bill_excel(request):
         water_cpu = 0
 
         for e in tpf_extras:  # one extra obj.
-            if e.description in ['Bed&Mattress', 'Clothing Cupboard', 'Dressing Table', 'TV Table', 'Fridge']:
+            if e.description in ['Bed&Mattress', 'Clothing Cupboard', 'Dressing Table', 'TV Table', 'Fridge','Air-Conditioner']:
                 rm_ac_cost += e.cpu
             elif e.description in ['Garbage', 'Wifi', 'Parking']:
                 osc += e.cpu
