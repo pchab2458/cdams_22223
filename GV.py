@@ -52,10 +52,17 @@ bank_info_2 = ' (ชำระเป็นเงินสด หรือโอ�
 
 # *******************************************************************************************************************
 
-excel_file_path_new_ac = "C:\\Users\\pboot\\cdams_excel"
+# excel_file_path = "C:\\Users\\pboot\\cdams_excel"
+
+# excel_file_new_ac = "new_account.xlsx"
+# excel_file_ew_con = "elec_water_consumption.xlsx"
+
+
+
+# Excel Files to be uploaded to PythonAnywher: **********************************************************************
+
+excel_file_path = "C:\\Users\\pboot\\cdams_excel"
 
 excel_file_new_ac = "new_account.xlsx"
 excel_file_ew_con = "elec_water_consumption.xlsx"
-
-
 

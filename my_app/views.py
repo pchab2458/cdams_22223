@@ -1208,7 +1208,7 @@ def tenant_info(request):
 
 # START OF MISC. *********************************************************************************
 def get_excel_data(ws_min_r, ws_max_r, ws_min_c, ws_max_c, excel_f):
-    os.chdir(GV.excel_file_path_new_ac)
+    os.chdir(GV.excel_file_path)
     wb = load_workbook(excel_f, data_only=True)  # TO WORK WITH VALUES ONLY
     ws = wb.active
 
