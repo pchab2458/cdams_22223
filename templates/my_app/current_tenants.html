@@ -23,7 +23,7 @@
         th, td {
             padding: .2em .2em;
             text-align: right;
-            {#width: 45px;#}
+        {#width: 45px;#}
         }
 
         tr:nth-child(even) {
@@ -43,7 +43,7 @@
 
         thead th:nth-child(2) {
             text-align: center;
-            {#width: 230px;#}
+        {#width: 230px;#}
         }
 
         thead th:nth-child(3) {
@@ -99,7 +99,7 @@
             <th>HP</th>
             <th>RMC</th>
             <th>RAC</th>
-{#            <th>OSC</th>#}
+            {#            <th>OSC</th>#}
             <th>DEPO</th>
             <th>ADJ</th>
             <th>OVD</th>
@@ -130,7 +130,7 @@
                 <td>{{ i.phone }}</td>
                 <td>{{ i.room_no.room_type.rate|floatformat:0|intcomma }}</td>
                 <td>{% room_acc_cost i.room_no.room_no %}</td>
-{#                <td>{% room_other_cost i.room_no.room_no %}</td>#}
+                {#                <td>{% room_other_cost i.room_no.room_no %}</td>#}
                 <td>{{ i.deposit|floatformat:0|intcomma }}</td>
                 <td>{{ i.adjust|floatformat:0|intcomma }}</td>
                 <td>{{ i.cum_ovd|floatformat:0|intcomma }}</td>

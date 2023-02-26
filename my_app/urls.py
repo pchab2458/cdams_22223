@@ -36,6 +36,6 @@ urlpatterns = [
     path('pre_create_new_account', views.pre_create_new_account_excel, name='pre_create_new_account'),
     path('create_new_account_excel', views.create_new_account_excel, name='create_new_account_excel'),
 
-    path('issue_bill_excel', views.issue_bill_excel, name= 'issue_bill_excel'),
+    path('issue_bill_excel', views.issue_bill_excel, name='issue_bill_excel'),
 
 ]

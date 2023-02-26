@@ -42,7 +42,6 @@ h2 {
 }
 
 
-
 ol {
     line-height: 1.5;
 }
@@ -236,6 +235,6 @@ ul.messages li a.close {
 
 
 .login-form {
-    float:left;
+    float: left;
 }
 
